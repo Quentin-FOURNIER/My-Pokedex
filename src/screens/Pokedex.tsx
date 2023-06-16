@@ -28,6 +28,25 @@ interface Props {
   region: string;
 }
 
+const Regions = () => {
+  const renderRegions = () => {
+    const regions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    return regions.map(region => (
+      <TouchableOpacity
+        key={region}
+        style={styles.regionView}
+        onPress={() => {
+          // Action à effectuer lorsque la TouchableOpacity est pressée
+        }}>
+        <Text style={styles.regionText}>{region}</Text>
+      </TouchableOpacity>
+    ));
+  };
+
+  return <View style={styles.separation}>{renderRegions()}</View>;
+};
+
 export default function PokedexRegionScreen({
   region = 'kanto',
 }: Props): JSX.Element {
@@ -65,7 +84,8 @@ export default function PokedexRegionScreen({
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.separation}>
-        <Text style={styles.region}>{region}</Text>
+        {/*<Text style={styles.region}>{region}</Text>*/}
+        <Regions />
       </View>
       <FlatList
         style={styles.flatList}
@@ -113,7 +133,7 @@ const styles = StyleSheet.create({
   },
   separation: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignContent: 'center',
     width: '100%',
     flexDirection: 'row',
@@ -157,4 +177,26 @@ const styles = StyleSheet.create({
     elevation: 6,
     backgroundColor: '#fff',
   },
+  regionView: {
+    backgroundColor: '#FFFFFF',
+    height: '80%',
+    width: '9%',
+    marginTop: '1%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: '1%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 6,
+  },
+  regionText: {
+    color: 'black',
+  }
 });
