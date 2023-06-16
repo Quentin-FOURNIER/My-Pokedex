@@ -1,20 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, Image} from 'react-native';
-import {update} from 'firebase/database';
-import {pokedexRef} from '../../services/database';
+import {update, get, ref} from 'firebase/database';
+import {database, pokedexRef} from '../../services/database';
 
 interface PokemonCaptureButtonProps {
   pokemonId: string;
+  shiny: boolean;
 }
 
 const PokemonCaptureButton: React.FC<PokemonCaptureButtonProps> = ({
   pokemonId,
+  shiny,
 }) => {
+  const word = shiny ? 'shiny' : 'classic';
+  const pokemonRef = ref(database, `pokedex/${pokemonId}/${word}`);
   const [captured, setCaptured] = useState(false);
+  get(pokemonRef).then(snapshot => {
+    console.log('coucou');
+    if (snapshot.exists()) {
+      const isCatched = snapshot.val();
+      console.log(isCatched);
+      setCaptured(isCatched || false);
+    } else {
+      console.log('lol');
+      setCaptured(false);
+    }
+  });
 
   const updateFirebase = (isCaptured: boolean) => {
     const updates: Partial<Record<string, any>> = {};
-    updates[`${pokemonId}/captured`] = isCaptured;
+    !shiny
+      ? (updates[`${pokemonId}/classic`] = isCaptured)
+      : (updates[`${pokemonId}/shiny`] = isCaptured);
     update(pokedexRef, updates);
   };
 

@@ -4,8 +4,6 @@ import PokedexRegionScreen from "../../screens/Pokedex";
 import PokemonCaptureButton from "./PokemonCaptureButton";
 
 export default function SpritePokemon({id}: {id: number}) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <View style={styles.mainView}>
       <Image
@@ -18,7 +16,7 @@ export default function SpritePokemon({id}: {id: number}) {
             '.png',
         }}
       />
-      <PokemonCaptureButton pokemonId={id.toString()}></PokemonCaptureButton>
+      <PokemonCaptureButton pokemonId={id.toString()} shiny={false}></PokemonCaptureButton>
     </View>
   );
 }

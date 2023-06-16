@@ -14,6 +14,6 @@ let config = {
 
 const app = initializeApp(config);
 
-const database = getDatabase(app);
+export const database = getDatabase(app);
 
 export const pokedexRef = ref(database, 'pokedex');

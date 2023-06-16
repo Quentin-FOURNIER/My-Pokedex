@@ -17,7 +17,7 @@ export default function SpritePokemonShiny({id}: {id: number}) {
             '.png',
         }}
       />
-      <PokemonCaptureButton pokemonId={id.toString()}></PokemonCaptureButton>
+      <PokemonCaptureButton pokemonId={id.toString()} shiny={true}></PokemonCaptureButton>
     </View>
   );
 }
