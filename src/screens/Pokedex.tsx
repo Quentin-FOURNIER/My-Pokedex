@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 type FirstLast = {
   first: number;
@@ -28,7 +28,7 @@ interface Props {
   region: string;
 }
 
-const Regions = () => {
+const Regions = ({ onRegionPress }: { onRegionPress: (region: number) => void }) => {
   const renderRegions = () => {
     const regions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -36,9 +36,7 @@ const Regions = () => {
       <TouchableOpacity
         key={region}
         style={styles.regionView}
-        onPress={() => {
-          // Action à effectuer lorsque la TouchableOpacity est pressée
-        }}>
+        onPress={() => onRegionPress(region)}>
         <Text style={styles.regionText}>{region}</Text>
       </TouchableOpacity>
     ));
@@ -48,50 +46,82 @@ const Regions = () => {
 };
 
 export default function PokedexRegionScreen({
-  region = 'kanto',
-}: Props): JSX.Element {
+                                              region: initialRegion = 'kanto',
+                                            }: Props): JSX.Element {
+  const [region, setRegion] = useState(initialRegion);
   const navigation = useNavigation();
 
   const generations: Region = {
-    kanto: {first: 1, last: 151},
-    johto: {first: 152, last: 251},
-    hoenn: {first: 252, last: 386},
-    sinnoh: {first: 387, last: 493},
-    unova: {first: 494, last: 649},
-    kalos: {first: 650, last: 721},
-    alola: {first: 722, last: 809},
-    galar: {first: 810, last: 905},
-    Paldea: {first: 906, last: 1010},
+    kanto: { first: 1, last: 151 },
+    johto: { first: 152, last: 251 },
+    hoenn: { first: 252, last: 386 },
+    sinnoh: { first: 387, last: 493 },
+    unova: { first: 494, last: 649 },
+    kalos: { first: 650, last: 721 },
+    alola: { first: 722, last: 809 },
+    galar: { first: 810, last: 905 },
+    Paldea: { first: 906, last: 1010 },
   };
 
-  const imagesPokemon: m = {id: [], uri: []};
+  const imagesPokemon: m = { id: [], uri: [] };
 
-  for (
-    let i: number = generations[region].first;
-    i <= generations[region].last;
-    i++
-  ) {
+  for (let i: number = generations[region].first; i <= generations[region].last; i++) {
     imagesPokemon.id.push(i);
     imagesPokemon.uri.push(
       'https://raw.githubusercontent.com/PokeAPI/' +
-        'sprites/master/sprites/pokemon/other/official-artwork/' +
-        i +
-        '.png',
+      'sprites/master/sprites/pokemon/other/official-artwork/' +
+      i +
+      '.png',
     );
   }
 
-  // @ts-ignore
+  const handleRegionPress = (region: number) => {
+    let selectedRegion = '';
+    switch (region) {
+      case 1:
+        selectedRegion = 'kanto';
+        break;
+      case 2:
+        selectedRegion = 'johto';
+        break;
+      case 3:
+        selectedRegion = 'hoenn';
+        break;
+      case 4:
+        selectedRegion = 'sinnoh';
+        break;
+      case 5:
+        selectedRegion = 'unova';
+        break;
+      case 6:
+        selectedRegion = 'kalos';
+        break;
+      case 7:
+        selectedRegion = 'alola';
+        break;
+      case 8:
+        selectedRegion = 'galar';
+        break;
+      case 9:
+        selectedRegion = 'Paldea';
+        break;
+      default:
+        selectedRegion = 'kanto';
+        break;
+    }
+    setRegion(selectedRegion);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.separation}>
-        {/*<Text style={styles.region}>{region}</Text>*/}
-        <Regions />
+        <Regions onRegionPress={handleRegionPress} />
       </View>
       <FlatList
         style={styles.flatList}
         data={imagesPokemon.uri}
         numColumns={4}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <View style={styles.imageShadow}>
             <Text
               style={{
@@ -110,7 +140,7 @@ export default function PokedexRegionScreen({
                   id: imagesPokemon.id[imagesPokemon.uri.indexOf(item)],
                 })
               }>
-              <Image source={{uri: item}} style={styles.sprite} />
+              <Image source={{ uri: item }} style={styles.sprite} />
             </TouchableOpacity>
           </View>
         )}
@@ -118,7 +148,7 @@ export default function PokedexRegionScreen({
         horizontal={false}
         scrollEnabled={true}
         contentContainerStyle={styles.listView}
-        contentInset={{bottom: 100}}
+        contentInset={{ bottom: 100 }}
       />
     </SafeAreaView>
   );
@@ -198,5 +228,5 @@ const styles = StyleSheet.create({
   },
   regionText: {
     color: 'black',
-  }
+  },
 });
