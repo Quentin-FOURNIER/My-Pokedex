@@ -1,4 +1,4 @@
-import React, {StyleSheet, View} from 'react-native';
+import React, { StyleSheet, Text, View } from "react-native";
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {getPokemon, getSpecie} from '../services/pokemonService';
 import {useEffect, useState} from 'react';

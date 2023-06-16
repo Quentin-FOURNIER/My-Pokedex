@@ -1,5 +1,7 @@
 import React, {Image, StyleSheet, Switch, View} from 'react-native';
 import {useState} from 'react';
+import PokedexRegionScreen from "../../screens/Pokedex";
+import PokemonCaptureButton from "./PokemonCaptureButton";
 
 export default function SpritePokemon({id}: {id: number}) {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -16,14 +18,7 @@ export default function SpritePokemon({id}: {id: number}) {
             '.png',
         }}
       />
-      <Switch
-        style={styles.switch}
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
+      <PokemonCaptureButton pokemonId={id.toString()}></PokemonCaptureButton>
     </View>
   );
 }
