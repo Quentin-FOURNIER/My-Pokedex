@@ -1,8 +1,7 @@
-import React, {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, {View, StyleSheet, Image} from 'react-native';
+import Gif from 'react-native-gif';
 
 export default function MyScreen(): JSX.Element {
-  const navigation = useNavigation();
   return (
     <View style={styles.vue}>
       <View style={styles.welcomeView}>
@@ -11,36 +10,10 @@ export default function MyScreen(): JSX.Element {
           source={require('../assets/home/Welcome.png')}
         />
       </View>
-      {/*<TouchableOpacity*/}
-      {/*  style={styles.petit_cadre}*/}
-      {/*  onPress={() => navigation.navigate('Metamorphe')}>*/}
-      {/*  <Image*/}
-      {/*    source={require('../assets/home/metamorphe.png')}*/}
-      {/*    style={styles.image_petit_cadre}*/}
-      {/*  />*/}
-      {/*</TouchableOpacity>*/}
-      {/*<View style={styles.petit_cadre}>*/}
-      {/*  <Image*/}
-      {/*    style={styles.image_petit_cadre}*/}
-      {/*    source={require('../assets/home/oeuf.png')}*/}
-      {/*  />*/}
-      {/*</View>*/}
-      {/*<View style={styles.petit_cadre}>*/}
-      {/*  <Image*/}
-      {/*    style={styles.image_petit_cadre}*/}
-      {/*    source={require('../assets/home/type_dragon.png')}*/}
-      {/*  />*/}
-      {/*</View>*/}
-      {/*<View style={styles.petit_cadre}>*/}
-      {/*  <Image*/}
-      {/*    style={styles.image_petit_cadre}*/}
-      {/*    source={require('../assets/home/meteo.png')}*/}
-      {/*  />*/}
-      {/*</View>*/}
       <View style={styles.grand_cadre}>
         <Image
           style={styles.image_grand_cadre}
-          source={require('../assets/home/MegaJungko.png')}
+          source={require('../assets/home/carapuceGang.gif')}
         />
       </View>
     </View>
@@ -59,6 +32,8 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 80,
+    paddingTop: 100,
+    paddingBottom: 100,
   },
   fond: {
     width: '100%',
@@ -104,7 +79,7 @@ const styles = StyleSheet.create({
   },
   image_grand_cadre: {
     height: '80%',
-    aspectRatio: '2744/1809',
+    aspectRatio: '540/304',
   },
   welcomeView: {
     width: '90%',
@@ -112,6 +87,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
   },
   welcome: {
     height: '55%',
