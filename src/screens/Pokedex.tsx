@@ -24,9 +24,7 @@ type m = {
   uri: string[];
 };
 
-interface Props {
-  region: string;
-}
+
 
 const Regions = ({
   onRegionPress,

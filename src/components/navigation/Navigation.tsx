@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'react-native';
 import Home from '../../screens/Home';
 import PokedexScreen from '../../screens/Pokedex';
-import MetamorpheScreen from '../../screens/MetamorpheScreen';
+import Metamorphe from '../../screens/Metamorphe';
 import DetailsScreen from '../../screens/DetailsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
@@ -43,8 +43,8 @@ export default function Navigation(): JSX.Element {
                 : require('../../assets/bottomNavigator/pokedex.png');
             } else if (route.name === 'Metamorphe') {
               logoPath = focused
-                ? require('../../assets/bottomNavigator/pokedex-focused.png')
-                : require('../../assets/bottomNavigator/pokedex.png');
+                ? require('../../assets/bottomNavigator/splash-focused.png')
+                : require('../../assets/bottomNavigator/splash.png');
             } else if (route.name === 'Details') {
               logoPath = focused
                 ? require('../../assets/bottomNavigator/pokedex-focused.png')
@@ -53,16 +53,10 @@ export default function Navigation(): JSX.Element {
             return <Image source={logoPath} style={{width: 25, height: 25}} />;
           },
         })}>
+        <Tab.Screen name={'Metamorphe'} children={() => <Metamorphe />} />
         <Tab.Screen name="Informations" children={() => <Home />} />
-        <Tab.Screen
-          name="Pokedex"
-          children={() => <PokedexScreen />}
-        />
-        <Tab.Screen
-          name={'Metamorphe'}
-          children={() => <MetamorpheScreen />}
-          options={{tabBarItemStyle: {display: 'none'}}}
-        />
+        <Tab.Screen name="Pokedex" children={() => <PokedexScreen />} />
+
         <Tab.Screen
           name={'Details'}
           children={() => <DetailsScreen />}

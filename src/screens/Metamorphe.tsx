@@ -1,10 +1,18 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
-import {getDitto} from '../services/pokemonService';
 import React, {useEffect, useState} from 'react';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {getDitto} from '../services/pokemonService';
+import {useNavigation} from '@react-navigation/native';
 
-export default function MetamorpheScreen() {
+export default function Metamorphe() {
   const [dittoForm, setDittoForm] = useState('');
-
+  const navigation = useNavigation();
   useEffect(() => {
     async function fetchData() {
       const result = await getDitto();
@@ -14,26 +22,33 @@ export default function MetamorpheScreen() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.mainView}>
       <View style={styles.separation}>
         <Text style={styles.region}>Ditto transformations</Text>
       </View>
       <FlatList
         style={styles.flatList}
         data={Object.keys(dittoForm)}
-        numColumns={3}
+        numColumns={2}
         renderItem={({item}) => (
           <View style={styles.imageShadow}>
-            <Image
-              source={{
-                uri:
-                  'https://raw.githubusercontent.com/PokeAPI/' +
-                  'sprites/master/sprites/pokemon/other/official-artwork/' +
-                  item +
-                  '.png',
-              }}
-              style={styles.sprite}
-            />
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Details', {
+                  id: item,
+                })
+              }>
+              <Image
+                source={{
+                  uri:
+                    'https://raw.githubusercontent.com/PokeAPI/' +
+                    'sprites/master/sprites/pokemon/other/official-artwork/' +
+                    item +
+                    '.png',
+                }}
+                style={styles.sprite}
+              />
+            </TouchableOpacity>
           </View>
         )}
         keyExtractor={(item: string, index: number) => index.toString()}
@@ -47,6 +62,9 @@ export default function MetamorpheScreen() {
 }
 
 const styles = StyleSheet.create({
+  mainView: {
+    display: 'flex',
+  },
   region: {
     color: '#1C2942',
     fontSize: 24,
@@ -56,10 +74,10 @@ const styles = StyleSheet.create({
   separation: {
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
-    height: 40,
+    height: 80,
   },
   back: {
     marginTop: 7,
@@ -68,9 +86,10 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   sprite: {
-    width: '80%',
+    height: '80%',
     aspectRatio: 1,
-    marginLeft: '10%',
+    marginLeft: '25%',
+    marginTop: '5%'
   },
   listView: {
     paddingBottom: 80,
@@ -83,10 +102,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageShadow: {
-    width: '31%',
-    aspectRatio: 1,
+    width: '45%',
+    marginLeft: '2.5%',
+    marginRight: '2.5%',
+    marginTop: '1.5%',
+    marginBottom: '1.5%',
+    height: 125,
     borderRadius: 10,
-    margin: '1%',
     display: 'flex',
     justifyContent: 'center',
     shadowColor: '#000',
