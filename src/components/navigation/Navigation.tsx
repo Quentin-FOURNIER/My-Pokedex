@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'react-native';
-import MyScreen from '../../screens/presentationPokemon';
+import Home from '../../screens/Home';
 import PokedexScreen from '../../screens/Pokedex';
 import MetamorpheScreen from '../../screens/MetamorpheScreen';
 import DetailsScreen from '../../screens/DetailsScreen';
@@ -53,7 +53,7 @@ export default function Navigation(): JSX.Element {
             return <Image source={logoPath} style={{width: 25, height: 25}} />;
           },
         })}>
-        <Tab.Screen name="Informations" children={() => <MyScreen />} />
+        <Tab.Screen name="Informations" children={() => <Home />} />
         <Tab.Screen
           name="Pokedex"
           children={() => <PokedexScreen />}
