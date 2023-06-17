@@ -49,21 +49,19 @@ const Regions = ({
   return <View style={styles.separation}>{renderRegions()}</View>;
 };
 
-export default function PokedexRegionScreen({
-  region: initialRegion = 'kanto',
-}: Props): JSX.Element {
-  const [region, setRegion] = useState(initialRegion);
+export default function PokedexRegionScreen(): React.JSX.Element {
+  const [region, setRegion] = useState('Kanto');
   const navigation = useNavigation();
 
   const generations: Region = {
-    kanto: {first: 1, last: 151},
-    johto: {first: 152, last: 251},
-    hoenn: {first: 252, last: 386},
-    sinnoh: {first: 387, last: 493},
-    unova: {first: 494, last: 649},
-    kalos: {first: 650, last: 721},
-    alola: {first: 722, last: 809},
-    galar: {first: 810, last: 905},
+    Kanto: {first: 1, last: 151},
+    Johto: {first: 152, last: 251},
+    Hoenn: {first: 252, last: 386},
+    Sinnoh: {first: 387, last: 493},
+    Unova: {first: 494, last: 649},
+    Kalos: {first: 650, last: 721},
+    Alola: {first: 722, last: 809},
+    Galar: {first: 810, last: 905},
     Paldea: {first: 906, last: 1010},
   };
 
@@ -87,34 +85,34 @@ export default function PokedexRegionScreen({
     let selectedRegion = '';
     switch (region) {
       case 1:
-        selectedRegion = 'kanto';
+        selectedRegion = 'Kanto';
         break;
       case 2:
-        selectedRegion = 'johto';
+        selectedRegion = 'Johto';
         break;
       case 3:
-        selectedRegion = 'hoenn';
+        selectedRegion = 'Hoenn';
         break;
       case 4:
-        selectedRegion = 'sinnoh';
+        selectedRegion = 'Sinnoh';
         break;
       case 5:
-        selectedRegion = 'unova';
+        selectedRegion = 'Unova';
         break;
       case 6:
-        selectedRegion = 'kalos';
+        selectedRegion = 'Kalos';
         break;
       case 7:
-        selectedRegion = 'alola';
+        selectedRegion = 'Alola';
         break;
       case 8:
-        selectedRegion = 'galar';
+        selectedRegion = 'Galar';
         break;
       case 9:
         selectedRegion = 'Paldea';
         break;
       default:
-        selectedRegion = 'kanto';
+        selectedRegion = 'Kanto';
         break;
     }
     setRegion(selectedRegion);

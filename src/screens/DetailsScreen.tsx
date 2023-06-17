@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-around',
-    marginTop: 10,
+    marginTop: 40,
     width: '100%',
   },
   spritesBisView: {width: '40%', display: 'flex', justifyContent: 'flex-start'},
@@ -247,6 +247,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     //alignItems: 'center',
     //marginBottom: 10,
-    marginTop: 20,
+    marginTop: 40,
   },
 });

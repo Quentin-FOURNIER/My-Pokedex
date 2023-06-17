@@ -56,7 +56,7 @@ export default function Navigation(): JSX.Element {
         <Tab.Screen name="Informations" children={() => <MyScreen />} />
         <Tab.Screen
           name="Pokedex"
-          children={() => <PokedexScreen region={'johto'} />}
+          children={() => <PokedexScreen />}
         />
         <Tab.Screen
           name={'Metamorphe'}
