@@ -16,13 +16,11 @@ const PokemonCaptureButton: React.FC<PokemonCaptureButtonProps> = ({
   const pokemonRef = ref(database, `pokedex/${pokemonId}/${word}`);
   const [captured, setCaptured] = useState(false);
   get(pokemonRef).then(snapshot => {
-    console.log('coucou');
     if (snapshot.exists()) {
       const isCatched = snapshot.val();
       console.log(isCatched);
       setCaptured(isCatched || false);
     } else {
-      console.log('lol');
       setCaptured(false);
     }
   });
