@@ -33,11 +33,7 @@ export default function Metamorphe() {
         renderItem={({item}) => (
           <View style={styles.imageShadow}>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Details', {
-                  id: item,
-                })
-              }>
+              onPress={() => navigation.navigate('Details', {id: item})}>
               <Image
                 source={{
                   uri:
@@ -89,7 +85,7 @@ const styles = StyleSheet.create({
     height: '80%',
     aspectRatio: 1,
     marginLeft: '25%',
-    marginTop: '5%'
+    marginTop: '5%',
   },
   listView: {
     paddingBottom: 80,
