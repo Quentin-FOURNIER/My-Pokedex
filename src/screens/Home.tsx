@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
   gifImage: {
     height: '80%',
     aspectRatio: '540/304',
-  }
+  },
 });

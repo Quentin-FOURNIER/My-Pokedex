@@ -13,12 +13,15 @@ import {useNavigation} from '@react-navigation/native';
 export default function Metamorphe() {
   const [dittoForm, setDittoForm] = useState('');
   const navigation = useNavigation();
+
   useEffect(() => {
-    async function fetchData() {
-      const result = await getDitto();
-      setDittoForm(result);
-    }
-    fetchData();
+    getDitto()
+      .then(response => {
+        setDittoForm(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -33,7 +36,9 @@ export default function Metamorphe() {
         renderItem={({item}) => (
           <View style={styles.imageShadow}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Details', {id: item})}>
+              onPress={() =>
+                navigation.navigate('Details' as never, {id: item} as never)
+              }>
               <Image
                 source={{
                   uri:

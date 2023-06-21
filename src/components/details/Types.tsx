@@ -1,4 +1,5 @@
-import React, {Image, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {Image, StyleSheet, View} from 'react-native';
 
 export default function Types({
   type1,
@@ -6,7 +7,7 @@ export default function Types({
 }: {
   type1: any;
   type2: any;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <View style={styles.mainView}>
       {type1 && (

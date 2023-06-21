@@ -1,11 +1,7 @@
-import React, {Image, StyleSheet, Switch, View} from 'react-native';
-import { useState } from "react";
-import PokemonCaptureButton from "./PokemonCaptureButton";
+import React, {Image, StyleSheet, View} from 'react-native';
+import PokemonCaptureButton from './PokemonCaptureButton';
 
 export default function SpritePokemonShiny({id}: {id: number}) {
-
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <View style={styles.mainView}>
       <Image
@@ -17,7 +13,7 @@ export default function SpritePokemonShiny({id}: {id: number}) {
             '.png',
         }}
       />
-      <PokemonCaptureButton pokemonId={id.toString()} shiny={true}></PokemonCaptureButton>
+      <PokemonCaptureButton pokemonId={id.toString()} shiny={true} />
     </View>
   );
 }
@@ -28,9 +24,7 @@ const styles = StyleSheet.create({
     directionFlex: 'column',
     alignItems: 'center',
     justifyContent: 'flex-end',
-
   },
   sprite: {width: '100%', aspectRatio: 1},
   switch: {marginBottom: 7},
-
 });

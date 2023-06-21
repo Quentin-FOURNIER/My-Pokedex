@@ -1,10 +1,10 @@
 import React, {Image, StyleSheet, Text, View} from 'react-native';
 
-export default function Sexe({rate}: {rate: number}) {
+export default function Sex({rate}: {rate: number}) {
   if (rate === -1) {
     return (
       <View style={styles.mainView}>
-        <View style={styles.assexualView}>
+        <View style={styles.asexualView}>
           <Image
             style={styles.unisexImage}
             source={require('../../assets/sex/assexue.png')}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  assexualView: {
+  asexualView: {
     width: '80%',
     height: '100%',
     alignItems: 'center',
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   },
   sexImage: {
     width: '100%',
-
   },
   unisexImage: {
     height: '60%',

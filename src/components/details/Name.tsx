@@ -1,4 +1,5 @@
-import React, {StyleSheet, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text} from 'react-native';
 
 function capitalize(str: string | null): string | null {
   if (!str) {
@@ -6,7 +7,7 @@ function capitalize(str: string | null): string | null {
   }
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
-export default function Name({name}: {name: string}): JSX.Element {
+export default function Name({name}: {name: string}): React.JSX.Element {
   return <Text style={styles.name}>{capitalize(name)}</Text>;
 }
 

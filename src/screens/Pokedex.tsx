@@ -24,8 +24,6 @@ type m = {
   uri: string[];
 };
 
-
-
 const Regions = ({
   onRegionPress,
 }: {
@@ -79,9 +77,9 @@ export default function PokedexRegionScreen(): React.JSX.Element {
     );
   }
 
-  const handleRegionPress = (region: number) => {
-    let selectedRegion = '';
-    switch (region) {
+  const handleRegionPress = (switchRegion: number) => {
+    let selectedRegion: string;
+    switch (switchRegion) {
       case 1:
         selectedRegion = 'Kanto';
         break;
@@ -118,7 +116,7 @@ export default function PokedexRegionScreen(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Text style={{color: '#1C2942', margin: 10, fontSize: 22}}>{region}</Text>
+      <Text style={styles.titleRegion}>{region}</Text>
       <View style={styles.separation}>
         <Regions onRegionPress={handleRegionPress} />
       </View>
@@ -128,22 +126,17 @@ export default function PokedexRegionScreen(): React.JSX.Element {
         numColumns={4}
         renderItem={({item}) => (
           <View style={styles.imageShadow}>
-            <Text
-              style={{
-                position: 'absolute',
-                top: 2,
-                left: 2,
-                color: '#1C2942',
-                fontFamily: 'Roboto',
-                fontWeight: 'bold',
-              }}>
+            <Text style={styles.idPokemon}>
               {imagesPokemon.id[imagesPokemon.uri.indexOf(item)]}
             </Text>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('Details', {
-                  id: imagesPokemon.id[imagesPokemon.uri.indexOf(item)],
-                })
+                navigation.navigate(
+                  'Details' as never,
+                  {
+                    id: imagesPokemon.id[imagesPokemon.uri.indexOf(item)],
+                  } as never,
+                )
               }>
               <Image source={{uri: item}} style={styles.sprite} />
             </TouchableOpacity>
@@ -166,6 +159,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     marginTop: 5,
   },
+  titleRegion: {color: '#1C2942', margin: 10, fontSize: 22},
   separation: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -173,6 +167,14 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     height: 40,
+  },
+  idPokemon: {
+    position: 'absolute',
+    top: 2,
+    left: 2,
+    color: '#1C2942',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
   },
   back: {
     marginTop: 7,

@@ -1,7 +1,5 @@
-import React, {Image, StyleSheet, Switch, View} from 'react-native';
-import {useState} from 'react';
-import PokedexRegionScreen from "../../screens/Pokedex";
-import PokemonCaptureButton from "./PokemonCaptureButton";
+import React, {Image, StyleSheet, View} from 'react-native';
+import PokemonCaptureButton from './PokemonCaptureButton';
 
 export default function SpritePokemon({id}: {id: number}) {
   return (
@@ -16,7 +14,7 @@ export default function SpritePokemon({id}: {id: number}) {
             '.png',
         }}
       />
-      <PokemonCaptureButton pokemonId={id.toString()} shiny={false}></PokemonCaptureButton>
+      <PokemonCaptureButton pokemonId={id.toString()} shiny={false} />
     </View>
   );
 }

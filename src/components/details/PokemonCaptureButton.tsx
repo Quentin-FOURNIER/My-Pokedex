@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {TouchableOpacity, Image} from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {update, get, ref} from 'firebase/database';
 import {database, pokedexRef} from '../../services/database';
 
@@ -30,7 +30,9 @@ const PokemonCaptureButton: React.FC<PokemonCaptureButtonProps> = ({
     !shiny
       ? (updates[`${pokemonId}/classic`] = isCaptured)
       : (updates[`${pokemonId}/shiny`] = isCaptured);
-    update(pokedexRef, updates);
+    update(pokedexRef, updates).catch(error => {
+      console.log(error);
+    });
   };
 
   const toggleCapture = () => {
@@ -47,10 +49,14 @@ const PokemonCaptureButton: React.FC<PokemonCaptureButtonProps> = ({
             ? require('../../assets/capture/catched.png')
             : require('../../assets/capture/notCatched.png')
         }
-        style={{width: 80, height: 80}}
+        style={styles.catch}
       />
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  catch: {width: 80, height: 80},
+});
 
 export default PokemonCaptureButton;

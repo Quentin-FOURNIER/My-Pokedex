@@ -1,4 +1,5 @@
-import React, { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {getPokemon, getSpecie} from '../services/pokemonService';
 import {useEffect, useState} from 'react';
@@ -8,8 +9,8 @@ import Types from '../components/details/Types';
 import {RootStackParamList} from '../components/navigation/Navigation';
 import SpritePokemon from '../components/details/SpritePokemon';
 import SpritePokemonShiny from '../components/details/SpritePokemonShiny';
-import Numero from '../components/details/Numero';
-import Sexe from '../components/details/Sexe';
+import Number from '../components/details/Number';
+import Sex from '../components/details/Sex';
 
 interface IPokemonDetails {
   forms: {
@@ -25,6 +26,9 @@ interface IPokemonDetails {
   }[];
 }
 
+interface ISpecieDetails {
+  gender_rate: number;
+}
 const types = {
   bug: require('../assets/types/bug.webp'),
   dark: require('../assets/types/dark.webp'),
@@ -48,22 +52,21 @@ const types = {
 
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 
-export default function DetailsScreen(): JSX.Element {
+export default function DetailsScreen(): React.JSX.Element {
   const route: DetailsScreenRouteProp = useRoute();
   const [pokemonDetails, setPokemonDetails] = useState<IPokemonDetails>();
-  const [specieDetails, setSpecieDetails] = useState();
+  const [specieDetails, setSpecieDetails] = useState<ISpecieDetails>();
 
   useEffect(() => {
-    async function fetchData(): Promise<void> {
-      const pokemonResult = await getPokemon(route.params.id);
-      setPokemonDetails(JSON.parse(JSON.stringify(pokemonResult)));
-      const specieResult = await getSpecie(route.params.id);
-      setSpecieDetails(JSON.parse(JSON.stringify(specieResult)));
-    }
-    fetchData();
+    getPokemon(route.params.id).then(response => {
+      setPokemonDetails(JSON.parse(JSON.stringify(response)));
+    });
+    getSpecie(route.params.id).then(response => {
+      setSpecieDetails(JSON.parse(JSON.stringify(response)));
+    });
   }, [route.params.id]);
 
-  if (!pokemonDetails) {
+  if (!pokemonDetails || !specieDetails) {
     return <View />;
   }
 
@@ -196,12 +199,12 @@ export default function DetailsScreen(): JSX.Element {
       <View style={styles.spritesView}>
         <SpritePokemon id={route.params.id} />
         <View style={styles.spritesBisView}>
-          <Numero id={route.params.id} />
+          <Number id={route.params.id} />
           <SpritePokemonShiny id={route.params.id} />
         </View>
       </View>
 
-      <View style={styles.statsSexeView}>
+      <View style={styles.statsSexView}>
         <Stats
           hp={pokemonDetails.stats[0].base_stat}
           attack={pokemonDetails.stats[1].base_stat}
@@ -209,7 +212,7 @@ export default function DetailsScreen(): JSX.Element {
           defenceSpe={pokemonDetails.stats[4].base_stat}
           defence={pokemonDetails.stats[2].base_stat}
         />
-        <Sexe rate={specieDetails?.gender_rate} />
+        <Sex rate={specieDetails.gender_rate} />
       </View>
     </View>
   );
@@ -240,7 +243,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   spritesBisView: {width: '40%', display: 'flex', justifyContent: 'flex-start'},
-  statsSexeView: {
+  statsSexView: {
     display: 'flex',
     width: '100%',
     flexDirection: 'row',
